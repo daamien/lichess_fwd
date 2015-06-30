@@ -20,7 +20,16 @@ Then install the lichess foreign data wrapper :
 
 ## USE
 
-Check out the  ``games.example.sql`` file for a basic example.
+```sql
+   CREATE EXTENSION multicorn;
+   CREATE SERVER lichess_fdw 
+      FOREIGN DATA WRAPPER multicorn options ( wrapper 'lichessfdw.LichessFDW');
+   CREATE FOREIGN TABLE games ( url TEXT, moves TEXT )
+      SERVER lichess_fdw  options ( username 'chuck_norris' );
+   SELECT COUNT(*) FROM games;
+```
+
+Check out the  ``games.example.sql`` file for an advanced example.
 
 ## Developper notes
 
